@@ -29,6 +29,5 @@ jobs:
        docker build --platform linux/amd64 -t cloud_t2 .
        docker tag cloud_t2 kimyeongrok/docker_cloud:${GITHUB_SHA::7}
        docker push kimyeongrok/docker_cloud:${GITHUB_SHA::7}
-     	
     
     
