@@ -42,6 +42,6 @@ jobs:
             docker tag kimyeongrok/docker_cloud:${GITHUB_SHA::7} cloud_t2
             docker stop cloud_t2
             docker rm cloud_t2
-            docker run -d --name cloud_t2 -p 3000:3001 cloud_t2
+            docker run -d --name cloud_t2 -p 80:3000 cloud_t2
     
     
