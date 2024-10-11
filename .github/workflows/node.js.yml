@@ -29,5 +29,19 @@ jobs:
        docker build --platform linux/amd64 -t cloud_t2 .
        docker tag cloud_t2 kimyeongrok/docker_cloud:${GITHUB_SHA::7}
        docker push kimyeongrok/docker_cloud:${GITHUB_SHA::7}
+    - name: Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_SERVER_HOST }}
+        username: ubuntu
+        key: ${{ secrets.PRIVATE_KEY }}
+        envs: GITHUB_SHA
+        script: |
+            docker rmi $(docker images -q)
+            docker pull kimyeongrok/docker_cloud:${GITHUB_SHA::7}
+            docker tag kimyeongrok/docker_cloud:${GITHUB_SHA::7} cloud_t2
+            docker stop cloud_t2
+            docker rm cloud_t2
+            docker run -d --name cloud_t2 -p 3001:3001 cloud_t2
     
     
