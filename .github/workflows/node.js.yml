@@ -26,5 +26,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Docker build
-      run: |
-        docker build -t cloud_t2 .
+	  run: |
+		  docker login -u ${{ secrets.USERNAME }} -p ${{ secrets.PASSWORD }}
+		  docker build -t --platform linux/amd64 -t cloud_t2 .
+  		docker tag cloud_t2 kimyeongrok/docker_cloud:${GITHUB_SHA::7}
+	  	docker push kimyeongrok/docker_cloud:${GITHUB_SHA::7}
