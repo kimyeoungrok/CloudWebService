@@ -9,6 +9,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "node-gpsd": "^0.3.4",
+    "socket.io": "^4.8.0"
   }
 }
